@@ -21,7 +21,16 @@ const DayList = () => {
   };
 
   useEffect(() => {
-    console.log("Count change");
+    fetch("http://localhost:3001/days")
+      .then((res) => {
+        console.log("리스폰", res);
+        return res.json();
+      })
+      .then((data) => {
+        console.log("데이타", data);
+        setDays(data);
+      })
+      .catch((e) => console.log(e));
   }, []);
   return (
     <>
@@ -32,8 +41,6 @@ const DayList = () => {
           </li>
         ))}
       </ul>
-      <button onClick={onclick}>{count}</button>
-      <button onClick={onclick2}>day change</button>
     </>
   );
 };
